@@ -3,7 +3,7 @@ spring:
     url: jdbc:postgresql://localhost:6000/landings
     username: mkt
     password: mkt
-    hikari:      maximum-pool-size: 5
+    hikari:      maximum-pool-size: 1
   jpa:
     properties:
       hibernate:

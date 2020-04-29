@@ -6,7 +6,11 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kyc.catalogs.entity.AuthorizedBanksDTO;
+import com.kyc.catalogs.entity.PaymenthMethodsDTO;
+import com.kyc.catalogs.entity.ServiceStatusDTO;
 import com.kyc.catalogs.entity.ServicesDTO;
+import com.kyc.catalogs.entity.StatesCountryDTO;
 import com.kyc.catalogs.enums.CatalogEnum;
 import com.kyc.catalogs.helpers.CatalogHelper;
 import com.kyc.catalogs.repositories.AuthorizedBanksRepository;
@@ -19,74 +23,93 @@ import com.kyc.catalogs.util.FunctionsUtil;
 @Service
 public class CatalogService {
 
-	@Autowired
-	private AuthorizedBanksRepository banksRepository;
-	
-	@Autowired
-	private PaymenthMethodsRepository paymenthsMethodRepository;
-	
-	@Autowired
-	private ServicesRepository servicesRepository;
-	
-	@Autowired
-	private ServiceStatusRepository servicesStatusRepository;
-	
-	@Autowired
-	private StateCountryRepository stateCountryRepository;
-	
-	@Autowired
-	private CatalogHelper catalogHelper;
-	
-	
-	public Object getCatalog(String cadCatalog) {
-		
-		CatalogEnum catalog = CatalogEnum.getInstanceByName(cadCatalog);
-		
-		switch(catalog) {
-		
-			case SERVICES:
-				
-				List<ServicesDTO> services=servicesRepository.findAll();
-				return services.stream().map(e-> catalogHelper.mapAsModel(e)).collect(Collectors.toList());
-				
-			case SERVICES_STATUS:
-				break;
-			case AUTHORIZED_BANKS:
-				break;
-			case PAYMENTH_METHODS:
-				break;
-			case STATES_COUNTRY:
-				break;
-		    default:
-		    	return null;
-		}
-		return null;
-	}
-	
-	public Object getCriteria(String cadCatalog,String criteria) {
-		
-		CatalogEnum catalog = CatalogEnum.getInstanceByName(cadCatalog);
-		
-		switch(catalog) {
-		
-			case SERVICES:
-				
-				ServicesDTO service=servicesRepository.getServiceById(FunctionsUtil.strMustInteger(criteria));
-				return catalogHelper.mapAsModel(service);
-				
-			case SERVICES_STATUS:
-				break;
-			case AUTHORIZED_BANKS:
-				break;
-			case PAYMENTH_METHODS:
-				break;
-			case STATES_COUNTRY:
-				break;
-		    default:
-		    	return null;
-		}
+   @Autowired
+   private AuthorizedBanksRepository banksRepository;
 
-		return null;
-	}
-	
+   @Autowired
+   private PaymenthMethodsRepository paymenthsMethodRepository;
+
+   @Autowired
+   private ServicesRepository servicesRepository;
+
+   @Autowired
+   private ServiceStatusRepository servicesStatusRepository;
+
+   @Autowired
+   private StateCountryRepository statesCountryRepository;
+
+   @Autowired
+   private CatalogHelper catalogHelper;
+
+   public Object getCatalog(String cadCatalog) {
+
+      CatalogEnum catalog = CatalogEnum.getInstanceByName(cadCatalog);
+
+      switch (catalog) {
+
+         case SERVICES:
+
+            List<ServicesDTO> services = servicesRepository.findAll();
+            return services.stream().map(e -> catalogHelper.mapAsModel(e)).collect(Collectors.toList());
+
+         case SERVICES_STATUS:
+
+            List<ServiceStatusDTO> status = servicesStatusRepository.findAll();
+            return status.stream().map(e -> catalogHelper.mapAsModel(e)).collect(Collectors.toList());
+
+         case AUTHORIZED_BANKS:
+
+            List<AuthorizedBanksDTO> banks = banksRepository.findAll();
+            return banks.stream().map(e -> catalogHelper.mapAsModel(e)).collect(Collectors.toList());
+
+         case PAYMENTH_METHODS:
+
+            List<PaymenthMethodsDTO> methods = paymenthsMethodRepository.findAll();
+            return methods.stream().map(e -> catalogHelper.mapAsModel(e)).collect(Collectors.toList());
+
+         case STATES_COUNTRY:
+
+            List<StatesCountryDTO> statesCountry = statesCountryRepository.findAll();
+            return statesCountry.stream().map(e -> catalogHelper.mapAsModel(e)).collect(Collectors.toList());
+
+         default:
+            return null;
+      }
+   }
+
+   public Object getCriteria(String cadCatalog, String criteria) {
+
+      CatalogEnum catalog = CatalogEnum.getInstanceByName(cadCatalog);
+
+      switch (catalog) {
+
+         case SERVICES:
+
+            ServicesDTO service = servicesRepository.getServiceById(FunctionsUtil.strMustInteger(criteria));
+            return catalogHelper.mapAsModel(service);
+
+         case SERVICES_STATUS:
+
+            ServiceStatusDTO status = servicesStatusRepository.getServiceStatusById(FunctionsUtil.strMustInteger(criteria));
+            return catalogHelper.mapAsModel(status);
+
+         case AUTHORIZED_BANKS:
+
+            AuthorizedBanksDTO bank = banksRepository.getAuthorizedBankById(FunctionsUtil.strMustInteger(criteria));
+            return catalogHelper.mapAsModel(bank);
+
+         case PAYMENTH_METHODS:
+
+            PaymenthMethodsDTO method = paymenthsMethodRepository.getPaymenthMethodById(FunctionsUtil.strMustInteger(criteria));
+            return catalogHelper.mapAsModel(method);
+
+         case STATES_COUNTRY:
+
+            StatesCountryDTO states = statesCountryRepository.getStatesCountryById(FunctionsUtil.strMustInteger(criteria));
+            return catalogHelper.mapAsModel(states);
+         default:
+            return null;
+      }
+   }
+
 }
