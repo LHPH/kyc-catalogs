@@ -12,6 +12,8 @@ buildNumber.properties
 .mvn/
 .settings/
 .project
+.idea
+*.iml
 mvnw
 mvnw.cmd
 # https://github.com/takari/maven-wrapper#usage-without-binary-jar

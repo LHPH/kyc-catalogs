@@ -7,14 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kyc.catalogs.entity.AuthorizedBanksDTO;
-import com.kyc.catalogs.entity.PaymenthMethodsDTO;
+import com.kyc.catalogs.entity.PaymentMethodsDTO;
 import com.kyc.catalogs.entity.ServiceStatusDTO;
 import com.kyc.catalogs.entity.ServicesDTO;
 import com.kyc.catalogs.entity.StatesCountryDTO;
 import com.kyc.catalogs.enums.CatalogEnum;
 import com.kyc.catalogs.helpers.CatalogHelper;
 import com.kyc.catalogs.repositories.AuthorizedBanksRepository;
-import com.kyc.catalogs.repositories.PaymenthMethodsRepository;
+import com.kyc.catalogs.repositories.PaymentMethodsRepository;
 import com.kyc.catalogs.repositories.ServiceStatusRepository;
 import com.kyc.catalogs.repositories.ServicesRepository;
 import com.kyc.catalogs.repositories.StateCountryRepository;
@@ -27,7 +27,7 @@ public class CatalogService {
    private AuthorizedBanksRepository banksRepository;
 
    @Autowired
-   private PaymenthMethodsRepository paymenthsMethodRepository;
+   private PaymentMethodsRepository paymenthsMethodRepository;
 
    @Autowired
    private ServicesRepository servicesRepository;
@@ -64,7 +64,7 @@ public class CatalogService {
 
          case PAYMENTH_METHODS:
 
-            List<PaymenthMethodsDTO> methods = paymenthsMethodRepository.findAll();
+            List<PaymentMethodsDTO> methods = paymenthsMethodRepository.findAll();
             return methods.stream().map(e -> catalogHelper.mapAsModel(e)).collect(Collectors.toList());
 
          case STATES_COUNTRY:
@@ -100,7 +100,7 @@ public class CatalogService {
 
          case PAYMENTH_METHODS:
 
-            PaymenthMethodsDTO method = paymenthsMethodRepository.getPaymenthMethodById(FunctionsUtil.strMustInteger(criteria));
+            PaymentMethodsDTO method = paymenthsMethodRepository.getPaymenthMethodById(FunctionsUtil.strMustInteger(criteria));
             return catalogHelper.mapAsModel(method);
 
          case STATES_COUNTRY:

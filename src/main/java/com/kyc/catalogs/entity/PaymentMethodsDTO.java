@@ -11,8 +11,8 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
-@Table(name="PAYMENTH_METHODS")
-public class PaymenthMethodsDTO {
+@Table(name="PAYMENT_METHODS")
+public class PaymentMethodsDTO {
 	
 	@Id
 	@Column(name="ID")
@@ -20,9 +20,5 @@ public class PaymenthMethodsDTO {
 	
 	@Column(name="METHOD")
 	private String method;
-	
-	@Column(name="GENERIC_REFERENCE")
-	private String genericReference;
-	
 
 }
