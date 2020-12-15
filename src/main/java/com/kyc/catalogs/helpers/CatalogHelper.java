@@ -3,7 +3,7 @@ package com.kyc.catalogs.helpers;
 import org.springframework.stereotype.Component;
 
 import com.kyc.catalogs.entity.AuthorizedBanksDTO;
-import com.kyc.catalogs.entity.PaymenthMethodsDTO;
+import com.kyc.catalogs.entity.PaymentMethodsDTO;
 import com.kyc.catalogs.entity.ServiceStatusDTO;
 import com.kyc.catalogs.entity.ServicesDTO;
 import com.kyc.catalogs.entity.StatesCountryDTO;
@@ -47,14 +47,13 @@ public class CatalogHelper {
 	   
 	}
 	
-	public PaymenthMethodsVO mapAsModel(PaymenthMethodsDTO methodDTO) {
+	public PaymenthMethodsVO mapAsModel(PaymentMethodsDTO methodDTO) {
 	   
 	   if(methodDTO!=null) {
 	      
 	      PaymenthMethodsVO methodVO = new PaymenthMethodsVO();
 	      methodVO.setId(methodDTO.getId());
 	      methodVO.setMethod(methodDTO.getMethod());
-	      methodVO.setGenericReference(methodDTO.getGenericReference());
 	      
 	      return methodVO;
 	   }
