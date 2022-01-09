@@ -1,27 +1,22 @@
 package com.kyc.catalogs.util;
 
-public class FunctionsUtil {
+import org.apache.commons.lang3.StringUtils;
+
+public final class FunctionsUtil {
 	
-	
+
+	/*
 	public static Integer strMustInteger(String cad) {
 		
-		Integer result = 0;
+		int result = 0;
 		
-		if(cad!=null && !cad.isEmpty() && strIsNumeric(cad)) {
+		if(StringUtils.isNumeric(cad)) {
 			
-			result= Integer.valueOf(cad);
+			result= Integer.parseInt(cad);
 		}
-		
 		return result;
-	}
-	
-	public static boolean strIsNumeric(String cad) {
-		
-		if(cad!=null) {
-			return cad.matches("[\\d]+");
-		}
-		return false;
-		
-	}
+	}*/
+
+	private FunctionsUtil(){}
 
 }

@@ -16,7 +16,11 @@ public class CatalogProperties {
     private List<CatalogInfo> catalogs;
 
     public CatalogInfo getCatalog(String id){
-        return catalogs.stream().filter(e -> e.getId().equals(id)).findFirst().orElse(new CatalogInfo());
+
+        return catalogs.stream()
+                .filter(e -> e.getId().equals(id))
+                .findFirst()
+                .orElse(new CatalogInfo());
     }
 
 }

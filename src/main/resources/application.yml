@@ -25,63 +25,76 @@ kyc-config:
 
     - id: kyc-services
       sql-query: SELECT ID,NAME,COST FROM KYC_SERVICES
-      sql-query-id: ID
+      sql-query-id: SELECT ID,NAME,COST FROM KYC_SERVICES WHERE ID = ?
       command: SQL_QUERY_COMMAND
 
     - id: kyc-service-status
       sql-query: SELECT ID,DESCRIPTION FROM KYC_SERVICE_STATUS
-      sql-query-id: ID
+      sql-query-id: SELECT ID,DESCRIPTION FROM KYC_SERVICE_STATUS WHERE ID = ?
       command: SQL_QUERY_COMMAND
 
-    #- id: kyc-channel
-    #  sql-query: SELECT ID,DESCRIPTION FROM KYC_CHANNEL
-    #  sql-query-id: ID
-    #  command: SQL_QUERY_COMMAND
+    - id: kyc-channel
+      sql-query: SELECT ID,DESCRIPTION FROM KYC_CHANNEL
+      sql-query-id: SELECT ID,DESCRIPTION FROM KYC_CHANNEL WHERE ID = ?
+      command: SQL_QUERY_COMMAND
 
     - id: kyc-payment-methods
       sql-query: SELECT ID, DESCRIPTION FROM KYC_PAYMENT_METHODS
-      sql-query-id: ID
+      sql-query-id: SELECT ID,DESCRIPTION FROM KYC_PAYMENT_METHODS WHERE ID = ?
       command: SQL_QUERY_COMMAND
 
     - id: kyc-states-country
       sql-query: SELECT ID,CODE,DESCRIPTION FROM KYC_STATES_COUNTRY
-      sql-query-id: ID
+      sql-query-id: SELECT ID,CODE,DESCRIPTION FROM KYC_STATES_COUNTRY WHERE ID = ?
       command: SQL_QUERY_COMMAND
 
     - id: kyc-transaction-status
       sql-query: SELECT ID, DESCRIPTION FROM KYC_TRANSACTION_STATUS
-      sql-id: ID
+      sql-query-id: SELECT ID, DESCRIPTION FROM KYC_TRANSACTION_STATUS WHERE ID = ?
       command: SQL_QUERY_COMMAND
 
     - id: kyc-payment-status
       sql-query: SELECT ID, DESCRIPTION FROM KYC_PAYMENT_STATUS
-      sql-id: ID
+      sql-query-id: SELECT ID, DESCRIPTION FROM KYC_PAYMENT_STATUS WHERE ID = ?
       command: SQL_QUERY_COMMAND
 
     - id: kyc-user-type
       sql-query: SELECT ID, DESCRIPTION FROM KYC_USER_TYPE
-      sql-id: ID
+      sql-query-id: SELECT ID, DESCRIPTION FROM KYC_USER_TYPE WHERE ID = ?
       command: SQL_QUERY_COMMAND
 
     - id: kyc-batch-id
       sql-query: SELECT ID, DESCRIPTION FROM KYC_BATCH_ID
-      sql-query-id: ID
+      sql-query-id: SELECT ID, DESCRIPTION FROM KYC_BATCH_ID WHERE ID = ?
       command: SQL_QUERY_COMMAND
 
     - id: kyc-batch-error-type
       sql-query: SELECT ID, DESCRIPTION FROM KYC_ERROR_TYPE
-      sql-query-id: ID
+      sql-query-id: SELECT ID, DESCRIPTION FROM KYC_ERROR_TYPE WHERE ID = ?
       command: SQL_QUERY_COMMAND
 
     - id: kyc-batch-status
       sql-query: SELECT ID, DESCRIPTION FROM KYC_BATCH_STATUS
-      sql-query-id: ID
+      sql-query-id: SELECT ID, DESCRIPTION FROM KYC_BATCH_STATUS WHERE ID = ?
       command: SQL_QUERY_COMMAND
 
     - id: kyc-report-type
       sql-query: SELECT ID, DESCRIPTION FROM KYC_REPORT_TYPE
-      sql-query-id: ID
+      sql-query-id: SELECT ID, DESCRIPTION FROM KYC_REPORT_TYPE WHERE ID = ?
       command: SQL_QUERY_COMMAND
+
+kyc-messages:
+  catalog:
+    messages:
+      "001":
+        code: KYC-CATALOGS-001
+        message: Unexpected Error
+        type: ERROR
+      "002":
+        code: KYC-CATALOGS-002
+        message: The element was not found
+        type: WARN
+
 
 logging:
   level:

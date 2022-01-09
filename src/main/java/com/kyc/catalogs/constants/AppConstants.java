@@ -1,0 +1,17 @@
+package com.kyc.catalogs.constants;
+
+public class AppConstants {
+	
+	public static final String ENDPOINT_CATALOG="/catalogs/{catalog}";
+	public static final String ENDPOINT_CATALOG_CRITERIA=ENDPOINT_CATALOG+"/{criteria}";
+
+	public static final String MESSAGE_001 = "001";
+	public static final String MESSAGE_002 = "002";
+
+	public static final String PATH_PARAM_CATALOG = "catalog";
+	public static final String PATH_PARAM_CRITERIA = "criteria";
+
+
+	private AppConstants(){}
+
+}

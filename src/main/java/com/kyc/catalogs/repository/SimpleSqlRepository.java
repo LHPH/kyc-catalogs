@@ -24,7 +24,7 @@ public class SimpleSqlRepository {
         return jdbcTemplate.queryForList(query);
     }
 
-    public Map<String,Object> getCatalogById(String query,String id){
+    public Map<String,Object> getCatalogById(String query,Object id){
 
         return jdbcTemplate.queryForMap(query,id);
     }

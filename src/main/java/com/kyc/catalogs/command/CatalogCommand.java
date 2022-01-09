@@ -4,14 +4,16 @@ import com.kyc.catalogs.model.properties.CatalogInfo;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-public interface CatalogCommand {
+import java.util.List;
 
-    default ResponseEntity<Object> invoke(CatalogInfo catalogInfo){
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+public interface CatalogCommand<T> {
+
+    default List<T> invoke(CatalogInfo catalogInfo){
+        throw new UnsupportedOperationException("Not Implemented");
     }
 
-    default ResponseEntity<Object>  invoke(CatalogInfo catalogInfo, String id){
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+    default T  invoke(CatalogInfo catalogInfo, Object id){
+        throw new UnsupportedOperationException("Not Implemented");
     }
 
 }
