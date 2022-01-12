@@ -10,7 +10,10 @@ import com.kyc.core.model.web.RequestData;
 import com.kyc.core.model.web.ResponseData;
 import com.kyc.core.properties.KycMessages;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -18,6 +21,7 @@ import org.springframework.stereotype.Service;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static com.kyc.catalogs.constants.AppConstants.MESSAGE_001;
 import static com.kyc.catalogs.constants.AppConstants.MESSAGE_002;
@@ -26,6 +30,8 @@ import static com.kyc.catalogs.constants.AppConstants.PATH_PARAM_CRITERIA;
 
 @Service
 public class CatalogService {
+
+    public static final Logger LOGGER = LogManager.getLogger(CatalogService.class);
 
     @Autowired
     private CatalogManager catalogManager;
@@ -36,12 +42,14 @@ public class CatalogService {
     @Autowired
     private KycMessages kycMessages;
 
+    @Cacheable(value = "ALL_CATALOG",key = "#req.getPathParams().get('catalog')")
     public ResponseData<List<LinkedHashMap<String,Object>>> getCatalog(RequestData<Void> req){
 
         Map<String,Object> map = req.getPathParams();
         String catalog = map.get(PATH_PARAM_CATALOG).toString();
 
         CatalogInfo catalogInfo = catalogProperties.getCatalog(catalog);
+        LOGGER.info("Consultando catalogo {}",catalog);
         SqlQueryCatalogCommand command = (SqlQueryCatalogCommand) catalogManager.getCommand(catalogInfo.getCommand());
         List<LinkedHashMap<String,Object>> result = command.invoke(catalogInfo);
         return ResponseData.of(result);
@@ -62,6 +70,8 @@ public class CatalogService {
         }
 
        try{
+
+           LOGGER.info("Consultando catalogo {}",catalog);
            CatalogInfo catalogInfo = catalogProperties.getCatalog(catalog);
            SqlQueryCatalogCommand command = (SqlQueryCatalogCommand) catalogManager.getCommand(catalogInfo.getCommand());
            LinkedHashMap<String,Object> result = command.invoke(catalogInfo,idRow);
@@ -75,6 +85,15 @@ public class CatalogService {
 
            throw sendError(MESSAGE_001,HttpStatus.INTERNAL_SERVER_ERROR,ex,req);
        }
+    }
+
+    public ResponseData<List<String>> getListCatalogs(){
+
+        List<String> result = catalogProperties.getCatalogs()
+                .stream().map(e -> e.getId())
+                .collect(Collectors.toList());
+
+        return ResponseData.of(result);
     }
 
     private KycRestException sendError(String code, HttpStatus httpStatus, Exception ex, RequestData<Void> req){

@@ -19,6 +19,7 @@ import java.util.Map;
 
 import static com.kyc.catalogs.constants.AppConstants.ENDPOINT_CATALOG;
 import static com.kyc.catalogs.constants.AppConstants.ENDPOINT_CATALOG_CRITERIA;
+import static com.kyc.catalogs.constants.AppConstants.ENDPOINT_CATALOG_INDEX;
 import static com.kyc.catalogs.constants.AppConstants.PATH_PARAM_CATALOG;
 import static com.kyc.catalogs.constants.AppConstants.PATH_PARAM_CRITERIA;
 
@@ -54,6 +55,12 @@ public class CatalogController {
 
 		return getDelegate().getElementById(req);
 
+	}
+
+	@GetMapping(value = ENDPOINT_CATALOG_INDEX)
+	public ResponseEntity<ResponseData<List<String>>> getCatalogsList(){
+
+		return getDelegate().getCatalogsList();
 	}
 
 	public CatalogDelegate getDelegate(){

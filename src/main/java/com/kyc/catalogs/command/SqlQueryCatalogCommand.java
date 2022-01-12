@@ -33,6 +33,7 @@ public class SqlQueryCatalogCommand implements CatalogCommand<LinkedHashMap<Stri
     @Override
     public List<LinkedHashMap<String,Object>> invoke(CatalogInfo catalogInfo) {
 
+        LOGGER.info("Query in Database");
         List<Map<String,Object>> map = repository.getCatalog(catalogInfo.getSqlQuery());
         Map<String,String> fields = catalogInfo.getFields();
 
@@ -44,6 +45,7 @@ public class SqlQueryCatalogCommand implements CatalogCommand<LinkedHashMap<Stri
     @Override
     public LinkedHashMap<String, Object> invoke(CatalogInfo catalogInfo, Object id) {
 
+        LOGGER.info("Query in Database");
         Map<String, Object> row = repository.getCatalogById(catalogInfo.getSqlQueryId(),id);
         Map<String, String> fields = catalogInfo.getFields();
         return catalogHelper.processMapping(row, fields);

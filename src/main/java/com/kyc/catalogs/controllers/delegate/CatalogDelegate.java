@@ -46,4 +46,10 @@ public class CatalogDelegate {
         return catalogService.getCatalogElementById(req).toResponseEntity();
     }
 
+    public ResponseEntity<ResponseData<List<String>>> getCatalogsList(){
+
+        LOGGER.info("Consultando lista de catalogos");
+        return catalogService.getListCatalogs().toResponseEntity();
+    }
+
 }
