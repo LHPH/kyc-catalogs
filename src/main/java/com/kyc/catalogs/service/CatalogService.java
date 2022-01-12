@@ -13,9 +13,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedHashMap;
@@ -94,6 +96,13 @@ public class CatalogService {
                 .collect(Collectors.toList());
 
         return ResponseData.of(result);
+    }
+
+    @CacheEvict(value = "ALL_CATALOG",allEntries = true)
+    @Scheduled(cron = "${kyc-config.cron.clean-cache}")
+    public ResponseData<Boolean> cleanCatalogCache(){
+        LOGGER.info("Cleans the cache of catalogs");
+        return ResponseData.of(true);
     }
 
     private KycRestException sendError(String code, HttpStatus httpStatus, Exception ex, RequestData<Void> req){

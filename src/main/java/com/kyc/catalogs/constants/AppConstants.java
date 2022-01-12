@@ -5,6 +5,7 @@ public class AppConstants {
 	public static final String ENDPOINT_CATALOG_INDEX = "/catalogs";
 	public static final String ENDPOINT_CATALOG="/catalogs/{catalog}";
 	public static final String ENDPOINT_CATALOG_CRITERIA=ENDPOINT_CATALOG+"/{criteria}";
+	public static final String ENDPOINT_CATALOG_CLEAN_CACHE = "/cache/eviction";
 
 	public static final String MESSAGE_001 = "001";
 	public static final String MESSAGE_002 = "002";

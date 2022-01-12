@@ -14,6 +14,10 @@ spring:
 
 server:
   port: ${PORT}
+
+kyc-config:
+  cron:
+    clean-cache: 0 6 * * * ?
   
 logging:
   level:

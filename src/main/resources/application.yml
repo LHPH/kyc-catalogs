@@ -21,6 +21,8 @@ management:
       enabled: false
 
 kyc-config:
+  cron:
+    clean-cache: 0 * * * * ?
   catalogs:
 
     - id: kyc-services
@@ -69,8 +71,8 @@ kyc-config:
       command: SQL_QUERY_COMMAND
 
     - id: kyc-batch-error-type
-      sql-query: SELECT ID, DESCRIPTION FROM KYC_ERROR_TYPE
-      sql-query-id: SELECT ID, DESCRIPTION FROM KYC_ERROR_TYPE WHERE ID = ?
+      sql-query: SELECT ID, DESCRIPTION FROM KYC_BATCH_ERROR_TYPE
+      sql-query-id: SELECT ID, DESCRIPTION FROM KYC_BATCH_ERROR_TYPE WHERE ID = ?
       command: SQL_QUERY_COMMAND
 
     - id: kyc-batch-status

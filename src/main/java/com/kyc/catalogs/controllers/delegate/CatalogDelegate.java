@@ -52,4 +52,9 @@ public class CatalogDelegate {
         return catalogService.getListCatalogs().toResponseEntity();
     }
 
+    public ResponseEntity<ResponseData<Boolean>> cleanCache(){
+
+        return catalogService.cleanCatalogCache().toResponseEntity();
+    }
+
 }

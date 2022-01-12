@@ -15,6 +15,10 @@ spring:
 
 server:
   port: 9000
+
+kyc-config:
+  cron:
+    clean-cache: 0 * * * * ?
   
 logging:
   level:

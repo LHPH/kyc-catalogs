@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collections;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 import static com.kyc.catalogs.constants.AppConstants.ENDPOINT_CATALOG;
+import static com.kyc.catalogs.constants.AppConstants.ENDPOINT_CATALOG_CLEAN_CACHE;
 import static com.kyc.catalogs.constants.AppConstants.ENDPOINT_CATALOG_CRITERIA;
 import static com.kyc.catalogs.constants.AppConstants.ENDPOINT_CATALOG_INDEX;
 import static com.kyc.catalogs.constants.AppConstants.PATH_PARAM_CATALOG;
@@ -62,6 +64,13 @@ public class CatalogController {
 
 		return getDelegate().getCatalogsList();
 	}
+
+	@PostMapping(value = ENDPOINT_CATALOG_CLEAN_CACHE)
+	public ResponseEntity<ResponseData<Boolean>> cleanCache(){
+
+		return getDelegate().cleanCache();
+	}
+
 
 	public CatalogDelegate getDelegate(){
 		return delegate;
