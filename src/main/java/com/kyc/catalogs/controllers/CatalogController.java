@@ -34,7 +34,7 @@ public class CatalogController {
 	private CatalogDelegate delegate;
 	
 	@GetMapping(value=ENDPOINT_CATALOG)
-	public ResponseEntity<ResponseData<List<LinkedHashMap<String,Object>>>> getCatalog(@PathVariable("catalog") String catalog){
+	public ResponseEntity<ResponseData<List<Object>>> getCatalog(@PathVariable("catalog") String catalog){
 
 		RequestData<Void> req = RequestData.<Void>builder()
 				.pathParams(Collections.singletonMap(PATH_PARAM_CATALOG,catalog))
@@ -44,7 +44,7 @@ public class CatalogController {
 	}
 	
 	@GetMapping(value=ENDPOINT_CATALOG_CRITERIA)
-	public ResponseEntity<ResponseData<LinkedHashMap<String,Object>>> getCatalogByCriteria(@PathVariable("catalog") String catalog,
+	public ResponseEntity<ResponseData<Object>> getCatalogByCriteria(@PathVariable("catalog") String catalog,
 			@PathVariable("criteria") String criteria){
 
 		Map<String,Object> map = new HashMap<>();

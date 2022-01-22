@@ -18,7 +18,7 @@ server:
 
 kyc-config:
   cron:
-    clean-cache: 0 * * * * ?
+    clean-cache: "0 */5 * * * ?"
   
 logging:
   level:

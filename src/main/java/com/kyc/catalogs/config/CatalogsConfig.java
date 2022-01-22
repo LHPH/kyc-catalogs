@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
+import static com.kyc.catalogs.constants.AppConstants.MESSAGE_001;
+
 @Configuration
 @Import(value = {KycMessages.class,KycGenericRestExceptionHandler.class})
 @EnableCaching
@@ -18,7 +20,7 @@ public class CatalogsConfig {
     @Bean
     public KycUnhandledExceptionHandler kycUnhandledExceptionHandler(KycMessages kycMessages){
 
-        return new KycUnhandledExceptionHandler(kycMessages.getMessage("001"));
+        return new KycUnhandledExceptionHandler(kycMessages.getMessage(MESSAGE_001));
     }
 
 }
