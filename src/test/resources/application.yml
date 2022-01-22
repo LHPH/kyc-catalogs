@@ -1,0 +1,7 @@
+
+kyc-config:
+  catalogs:
+    - id: kyc-test
+      sql-query: SQL_TEST
+      sql-query-id: SQL_TEST_ID
+      command: COMMAND_TEST
