@@ -7,18 +7,8 @@ import java.util.List;
 
 public interface CatalogCommand<T> {
 
-    default List<T> invoke(CatalogInfo catalogInfo){
-        throw KycRestException.builder()
-                .outputData("Not Implemented")
-                .status(HttpStatus.NOT_IMPLEMENTED)
-                .build();
-    }
+    List<T> invoke(CatalogInfo catalogInfo);
 
-    default T  invoke(CatalogInfo catalogInfo, Object id){
-        throw KycRestException.builder()
-                .outputData("Not Implemented")
-                .status(HttpStatus.NOT_IMPLEMENTED)
-                .build();
-    }
+    T  invoke(CatalogInfo catalogInfo, Object id);
 
 }

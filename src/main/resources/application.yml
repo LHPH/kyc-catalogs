@@ -19,6 +19,9 @@ management:
       enabled: false
     session:
       enabled: false
+  info:
+    build:
+      enabled: false
 
 kyc-config:
   cron:
@@ -96,7 +99,10 @@ kyc-messages:
         code: KYC-CATALOGS-002
         message: The element was not found
         type: WARN
-
+      "003":
+        code: KYC-CATALOGS-003
+        message: The catalog was not found
+        type: WARN
 
 logging:
   level:

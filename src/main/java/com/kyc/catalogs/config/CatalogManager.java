@@ -1,6 +1,7 @@
 package com.kyc.catalogs.config;
 
 import com.kyc.catalogs.command.CatalogCommand;
+import com.kyc.catalogs.command.InvalidCatalogCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
@@ -17,7 +18,7 @@ public class CatalogManager {
             CatalogCommand<Object> commandBean = (CatalogCommand<Object>) applicationContext.getBean(command);
             return commandBean;
         }
-        return new CatalogCommand<Object>() {};
+        return applicationContext.getBean(InvalidCatalogCommand.class);
     }
 
 }
