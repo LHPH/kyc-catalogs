@@ -1,10 +1,5 @@
 package com.kyc.catalogs.controllers;
 
-import static com.kyc.catalogs.constants.AppConstants.ENDPOINT_CATALOG_CLEAN_CACHE;
-import static com.kyc.catalogs.constants.AppConstants.ENDPOINT_CATALOG_CRITERIA;
-import static com.kyc.catalogs.constants.AppConstants.ENDPOINT_CATALOG_INDEX;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-
 import com.kyc.catalogs.controllers.delegate.CatalogDelegate;
 import com.kyc.core.model.web.RequestData;
 import com.kyc.core.model.web.ResponseData;
@@ -25,8 +20,12 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 import static com.kyc.catalogs.constants.AppConstants.ENDPOINT_CATALOG;
+import static com.kyc.catalogs.constants.AppConstants.ENDPOINT_CATALOG_CLEAN_CACHE;
+import static com.kyc.catalogs.constants.AppConstants.ENDPOINT_CATALOG_CRITERIA;
+import static com.kyc.catalogs.constants.AppConstants.ENDPOINT_CATALOG_INDEX;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;

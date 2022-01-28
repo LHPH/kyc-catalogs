@@ -2,13 +2,12 @@ package com.kyc.catalogs.controllers.delegate;
 
 import com.kyc.catalogs.service.CatalogService;
 import com.kyc.core.model.web.RequestData;
-import org.apache.logging.log4j.LogManager;
+import com.kyc.core.model.web.ResponseData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import com.kyc.core.model.web.ResponseData;
 
 import java.util.List;
 

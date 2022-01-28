@@ -2,17 +2,15 @@ package com.kyc.catalogs.command;
 
 import com.kyc.catalogs.model.properties.CatalogInfo;
 import com.kyc.catalogs.repository.SimpleSqlRepository;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
 
 @Component("SQL_QUERY_COMMAND")
 public class SqlQueryCatalogCommand implements CatalogCommand<LinkedHashMap<String,Object>>{

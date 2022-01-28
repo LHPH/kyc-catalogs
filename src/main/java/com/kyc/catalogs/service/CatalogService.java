@@ -2,15 +2,14 @@ package com.kyc.catalogs.service;
 
 import com.kyc.catalogs.command.CatalogCommand;
 import com.kyc.catalogs.config.CatalogManager;
-import com.kyc.catalogs.properties.CatalogProperties;
 import com.kyc.catalogs.model.properties.CatalogInfo;
+import com.kyc.catalogs.properties.CatalogProperties;
 import com.kyc.core.exception.KycRestException;
 import com.kyc.core.model.web.MessageData;
 import com.kyc.core.model.web.RequestData;
 import com.kyc.core.model.web.ResponseData;
 import com.kyc.core.properties.KycMessages;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.LogManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

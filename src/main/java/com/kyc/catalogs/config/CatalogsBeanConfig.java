@@ -2,7 +2,6 @@ package com.kyc.catalogs.config;
 
 import com.kyc.catalogs.model.properties.CatalogInfo;
 import com.kyc.catalogs.properties.CatalogProperties;
-import org.apache.logging.log4j.LogManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;

@@ -2,8 +2,8 @@ package com.kyc.catalogs.service;
 
 import com.kyc.catalogs.command.CatalogCommand;
 import com.kyc.catalogs.config.CatalogManager;
-import com.kyc.catalogs.properties.CatalogProperties;
 import com.kyc.catalogs.model.properties.CatalogInfo;
+import com.kyc.catalogs.properties.CatalogProperties;
 import com.kyc.core.exception.KycRestException;
 import com.kyc.core.model.web.RequestData;
 import com.kyc.core.model.web.ResponseData;
