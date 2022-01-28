@@ -2,8 +2,9 @@ package com.kyc.catalogs.command;
 
 import com.kyc.catalogs.model.properties.CatalogInfo;
 import com.kyc.catalogs.repository.SimpleSqlRepository;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +17,7 @@ import java.util.List;
 @Component("SQL_QUERY_COMMAND")
 public class SqlQueryCatalogCommand implements CatalogCommand<LinkedHashMap<String,Object>>{
 
-    public static final Logger LOGGER = LogManager.getLogger(SqlQueryCatalogCommand.class);
+    public static final Logger LOGGER = LoggerFactory.getLogger(SqlQueryCatalogCommand.class);
 
     @Autowired
     private SimpleSqlRepository repository;

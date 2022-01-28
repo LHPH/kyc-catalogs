@@ -14,8 +14,6 @@ import java.util.Properties;
 @Repository
 public class SimpleSqlRepository {
 
-    private static final Logger LOGGER = LogManager.getLogger(SimpleSqlRepository.class);
-
     @Autowired
     private JdbcTemplate jdbcTemplate;
 

@@ -3,7 +3,8 @@ package com.kyc.catalogs.controllers.delegate;
 import com.kyc.catalogs.service.CatalogService;
 import com.kyc.core.model.web.RequestData;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -14,7 +15,7 @@ import java.util.List;
 @Component
 public class CatalogDelegate {
 
-    public static final Logger LOGGER = LogManager.getLogger(CatalogDelegate.class);
+    public static final Logger LOGGER = LoggerFactory.getLogger(CatalogDelegate.class);
 
     @Autowired
     private CatalogService catalogService;

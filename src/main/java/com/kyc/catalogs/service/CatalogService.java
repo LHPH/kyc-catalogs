@@ -11,7 +11,8 @@ import com.kyc.core.model.web.ResponseData;
 import com.kyc.core.properties.KycMessages;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -32,7 +33,7 @@ import static com.kyc.catalogs.constants.AppConstants.PATH_PARAM_CRITERIA;
 @Service
 public class CatalogService {
 
-    public static final Logger LOGGER = LogManager.getLogger(CatalogService.class);
+    public static final Logger LOGGER = LoggerFactory.getLogger(CatalogService.class);
 
     @Autowired
     private CatalogManager catalogManager;
