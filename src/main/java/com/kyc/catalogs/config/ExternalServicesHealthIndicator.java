@@ -7,13 +7,13 @@ import org.springframework.boot.actuate.health.HealthIndicator;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.stereotype.Component;
 
-@Component("session")
-@ConditionalOnEnabledHealthIndicator("session")
+@Component
+@ConditionalOnEnabledHealthIndicator("external-services")
 @AutoConfigureBefore(HealthContributorAutoConfiguration.class)
-public class SessionHealthIndicator implements HealthIndicator {
+public class ExternalServicesHealthIndicator implements HealthIndicator {
 
     @Override
     public Health health() {
-        return Health.down().build();
+        return Health.unknown().build();
     }
 }
