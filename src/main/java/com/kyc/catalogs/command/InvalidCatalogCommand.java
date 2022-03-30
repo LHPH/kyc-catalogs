@@ -18,7 +18,7 @@ public class InvalidCatalogCommand implements CatalogCommand<Object>{
     private KycMessages kycMessages;
 
     public List<Object> invoke(CatalogInfo catalogInfo){
-        throw KycRestException.builder()
+        throw KycRestException.builderRestException()
                 .outputData("Not Implemented")
                 .errorData(kycMessages.getMessage(MESSAGE_003))
                 .status(HttpStatus.NOT_IMPLEMENTED)
@@ -26,7 +26,7 @@ public class InvalidCatalogCommand implements CatalogCommand<Object>{
     }
 
     public Object  invoke(CatalogInfo catalogInfo, Object id){
-        throw KycRestException.builder()
+        throw KycRestException.builderRestException()
                 .outputData("Not Implemented")
                 .errorData(kycMessages.getMessage(MESSAGE_003))
                 .status(HttpStatus.NOT_IMPLEMENTED)

@@ -107,7 +107,7 @@ public class CatalogService {
     private KycRestException sendError(String code, HttpStatus httpStatus, Exception ex, RequestData<Void> req){
 
         MessageData message = kycMessages.getMessage(code);
-        return KycRestException.builder()
+        return KycRestException.builderRestException()
                 .errorData(message)
                 .exception(ex)
                 .inputData(req)

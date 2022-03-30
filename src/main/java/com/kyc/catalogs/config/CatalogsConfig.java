@@ -1,8 +1,8 @@
 package com.kyc.catalogs.config;
 
 import com.kyc.core.config.BuildDetailConfig;
-import com.kyc.core.exception.KycGenericRestExceptionHandler;
-import com.kyc.core.exception.KycUnhandledExceptionHandler;
+import com.kyc.core.exception.handlers.KycGenericRestExceptionHandler;
+import com.kyc.core.exception.handlers.KycUnhandledExceptionHandler;
 import com.kyc.core.properties.KycMessages;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
