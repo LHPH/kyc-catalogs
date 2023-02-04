@@ -73,16 +73,6 @@ kyc-config:
       sql-query-id: SELECT ID, DESCRIPTION FROM KYC_BATCH_ID WHERE ID = ?
       command: SQL_QUERY_COMMAND
 
-    - id: kyc-batch-error-type
-      sql-query: SELECT ID, DESCRIPTION FROM KYC_BATCH_ERROR_TYPE
-      sql-query-id: SELECT ID, DESCRIPTION FROM KYC_BATCH_ERROR_TYPE WHERE ID = ?
-      command: SQL_QUERY_COMMAND
-
-    - id: kyc-batch-status
-      sql-query: SELECT ID, DESCRIPTION FROM KYC_BATCH_STATUS
-      sql-query-id: SELECT ID, DESCRIPTION FROM KYC_BATCH_STATUS WHERE ID = ?
-      command: SQL_QUERY_COMMAND
-
     - id: kyc-report-type
       sql-query: SELECT ID, DESCRIPTION FROM KYC_REPORT_TYPE
       sql-query-id: SELECT ID, DESCRIPTION FROM KYC_REPORT_TYPE WHERE ID = ?
