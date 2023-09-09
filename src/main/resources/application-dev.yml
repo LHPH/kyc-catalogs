@@ -12,10 +12,6 @@ spring:
           use_jdbc_metadata_defaults: false
     database-platform: org.hibernate.dialect.PostgreSQL9Dialect
 
-
-server:
-  port: 9000
-
 kyc-config:
   cron:
     clean-cache: "0 */5 * * * ?"
@@ -28,3 +24,11 @@ logging:
     org.hibernate.SQL: DEBUG
     org.hibernate.type.descriptor.sql: TRACE
     org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping: TRACE
+
+server:
+  ssl:
+    enabled: true
+    key-store-type: PKCS12
+    key-store: /opt/kyc/kyc-config-files/keystore.p12
+    key-store-password: test
+    key-alias: backbone-key

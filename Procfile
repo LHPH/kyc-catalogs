@@ -1,1 +1,0 @@
-web: java $JAVA_OPTS -Dspring.profiles.active=prod -jar target/kyc-catalogs-1.0.0.jar
