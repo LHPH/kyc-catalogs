@@ -5,6 +5,7 @@ import com.kyc.catalogs.config.CatalogManager;
 import com.kyc.catalogs.model.properties.CatalogInfo;
 import com.kyc.catalogs.properties.CatalogProperties;
 import com.kyc.core.exception.KycRestException;
+import com.kyc.core.exception.KycSoapException;
 import com.kyc.core.model.web.MessageData;
 import com.kyc.core.model.web.RequestData;
 import com.kyc.core.model.web.ResponseData;
@@ -19,6 +20,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.ws.soap.client.SoapFaultClientException;
 
 import java.util.List;
 import java.util.Map;
@@ -80,7 +82,15 @@ public class CatalogService {
        }
        catch(EmptyResultDataAccessException empEx){
 
-           throw sendError(MESSAGE_002,HttpStatus.NOT_FOUND,null,req);
+           throw sendError(MESSAGE_002,HttpStatus.UNPROCESSABLE_ENTITY,null,req);
+       }
+       catch(KycSoapException soapEx){
+
+           if(soapEx.getException() instanceof SoapFaultClientException){
+
+               throw sendError(MESSAGE_002,HttpStatus.UNPROCESSABLE_ENTITY,soapEx,req);
+           }
+           throw sendError(MESSAGE_001,HttpStatus.SERVICE_UNAVAILABLE,soapEx,req);
        }
        catch(Exception ex){
 

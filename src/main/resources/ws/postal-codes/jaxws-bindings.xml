@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jaxws:bindings
+        xmlns:jaxws="http://java.sun.com/xml/ns/jaxws"
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        xs:schemaLocation="http://java.sun.com/xml/ns/jaxws/wsdl_customizationschema_2_0.xsd"
+        jaxws:version="2.0">
+
+    <jaxws:package name="com.kyc.catalogs.ws.postalcodes"/>
+    <jaxws:enableWrapperStyle>false</jaxws:enableWrapperStyle>
+
+</jaxws:bindings>

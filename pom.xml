@@ -66,6 +66,11 @@
         </dependency>
 
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web-services</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
@@ -95,6 +100,33 @@
             <version>1.0.0</version>
         </dependency>
 
+        <!--
+        <dependency>
+            <groupId>jakarta.xml.ws</groupId>
+            <artifactId>jakarta.xml.ws-api</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sun.xml.ws</groupId>
+            <artifactId>jaxws-rt</artifactId>
+            <version>3.0.0</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>3.0.0</version>
+            <scope>runtime</scope>
+        </dependency>
+        -->
 
     </dependencies>
 
@@ -141,6 +173,34 @@
                         <goals>
                             <goal>build-info</goal>
                         </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.sun.xml.ws</groupId>
+                <artifactId>jaxws-maven-plugin</artifactId>
+                <version>2.3.7</version>
+                <executions>
+                    <execution>
+                        <id>postal-codes-soap</id>
+                        <goals>
+                            <goal>wsimport</goal>
+                        </goals>
+                        <configuration>
+                            <wsdlFiles>
+                                <wsdlFile>${project.basedir}/src/main/resources/ws/postal-codes/KYCPostalCodes.wsdl</wsdlFile>
+                            </wsdlFiles>
+                            <bindingFiles>
+                                <bindingFile>${project.basedir}/src/main/resources/ws/postal-codes/jaxws-bindings.xml</bindingFile>
+                                <bindingFile>${project.basedir}/src/main/resources/ws/postal-codes/jaxb-bindings.xml</bindingFile>
+                            </bindingFiles>
+                            <!--
+                            <packageName>com.kyc.catalogs.ws.postalcodes</packageName>
+                            -->
+                            <sourceDestDir>
+                                ${project.build.directory}/generated-sources/
+                            </sourceDestDir>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
