@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
@@ -36,8 +35,6 @@ public class SqlQueryCatalogCommandTest {
         catalogInfo = new CatalogInfo();
         catalogInfo.setSqlQuery("QUERY");
         catalogInfo.setSqlQueryId("QUERY_ID");
-
-        MockitoAnnotations.initMocks(this);
     }
 
     @Test

@@ -3,14 +3,12 @@ package com.kyc.catalogs.command;
 
 import com.kyc.catalogs.model.properties.CatalogInfo;
 import com.kyc.core.exception.KycRestException;
-import com.kyc.core.model.web.MessageData;
+import com.kyc.core.model.MessageData;
 import com.kyc.core.properties.KycMessages;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.mockito.ArgumentMatchers.anyString;
@@ -24,11 +22,6 @@ public class InvalidCatalogCommandTest {
 
     @InjectMocks
     private InvalidCatalogCommand command;
-
-    @Before
-    public void setUp(){
-        MockitoAnnotations.initMocks(this);
-    }
 
     @Test(expected = KycRestException.class)
     public void invoke_catalog_throwException(){

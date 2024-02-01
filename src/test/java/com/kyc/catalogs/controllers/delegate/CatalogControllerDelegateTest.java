@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -34,7 +33,6 @@ public class CatalogControllerDelegateTest {
     public void setUp(){
 
         requestData = RequestData.builder().build();
-        MockitoAnnotations.initMocks(this);
     }
 
     @Test

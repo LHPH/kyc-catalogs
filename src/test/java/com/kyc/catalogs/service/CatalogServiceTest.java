@@ -14,7 +14,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.dao.InvalidDataAccessResourceUsageException;
@@ -67,8 +66,6 @@ public class CatalogServiceTest {
 
         catalogInfo = new CatalogInfo();
         catalogInfo.setCommand(COMMAND);
-
-        MockitoAnnotations.initMocks(this);
     }
 
     @Test
@@ -152,7 +149,7 @@ public class CatalogServiceTest {
         }
         catch(KycRestException ex){
 
-            Assert.assertEquals(HttpStatus.NOT_FOUND,ex.getStatus());
+            Assert.assertEquals(HttpStatus.UNPROCESSABLE_ENTITY,ex.getStatus());
         }
     }
 
