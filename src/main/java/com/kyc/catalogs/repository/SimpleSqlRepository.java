@@ -18,6 +18,11 @@ public class SimpleSqlRepository {
         return jdbcTemplate.queryForList(query);
     }
 
+    public List<Map<String,Object>> getCatalog(String query,Object... args){
+
+        return jdbcTemplate.queryForList(query,args);
+    }
+
     public Map<String,Object> getCatalogById(String query,Object id){
 
         return jdbcTemplate.queryForMap(query,id);

@@ -27,13 +27,13 @@ public class InvalidCatalogCommandTest {
     public void invoke_catalog_throwException(){
 
         when(kycMessages.getMessage(anyString())).thenReturn(new MessageData());
-        command.invoke(new CatalogInfo());
+        command.invokeList(new CatalogInfo());
     }
 
     @Test(expected = KycRestException.class)
     public void invoke_catalog_criteria_throwException(){
 
         when(kycMessages.getMessage(anyString())).thenReturn(new MessageData());
-        command.invoke(new CatalogInfo(),"1");
+        command.invokeSingle(new CatalogInfo(),"1");
     }
 }

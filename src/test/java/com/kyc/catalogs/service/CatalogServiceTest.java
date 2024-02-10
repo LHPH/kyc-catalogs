@@ -2,6 +2,7 @@ package com.kyc.catalogs.service;
 
 import com.kyc.catalogs.command.CatalogCommand;
 import com.kyc.catalogs.config.CatalogManager;
+import com.kyc.catalogs.enums.CatalogResultType;
 import com.kyc.catalogs.model.properties.CatalogInfo;
 import com.kyc.catalogs.properties.CatalogProperties;
 import com.kyc.core.exception.KycRestException;
@@ -66,14 +67,15 @@ public class CatalogServiceTest {
 
         catalogInfo = new CatalogInfo();
         catalogInfo.setCommand(COMMAND);
+        catalogInfo.setType(CatalogResultType.LIST.name().toLowerCase());
     }
 
     @Test
     public void getCatalog_retrieveCatalog_returnCatalog(){
 
         when(catalogProperties.getCatalog(CATALOG_VALUE)).thenReturn(catalogInfo);
-        when(catalogManager.getCommand(COMMAND)).thenReturn(command);
-        when(command.invoke(catalogInfo)).thenReturn(new ArrayList<>());
+        when(catalogManager.getCommand(catalogInfo, CatalogResultType.LIST)).thenReturn(command);
+        when(command.invokeList(catalogInfo)).thenReturn(new ArrayList<>());
 
         ResponseData<List<Object>> result = catalogService.getCatalog(request);
 
@@ -93,9 +95,11 @@ public class CatalogServiceTest {
                 .pathParams(params)
                 .build();
 
+        catalogInfo.setType(CatalogResultType.SINGLE.name().toLowerCase());
+
         when(catalogProperties.getCatalog(CATALOG_VALUE)).thenReturn(catalogInfo);
-        when(catalogManager.getCommand(COMMAND)).thenReturn(command);
-        when(command.invoke(catalogInfo,id)).thenReturn(new Object());
+        when(catalogManager.getCommand(catalogInfo,CatalogResultType.SINGLE)).thenReturn(command);
+        when(command.invokeSingle(catalogInfo,id)).thenReturn(new Object());
 
         ResponseData<Object> result = catalogService.getCatalogElementById(request);
 
@@ -116,9 +120,11 @@ public class CatalogServiceTest {
                 .pathParams(params)
                 .build();
 
+        catalogInfo.setType(CatalogResultType.SINGLE.name().toLowerCase());
+
         when(catalogProperties.getCatalog(CATALOG_VALUE)).thenReturn(catalogInfo);
-        when(catalogManager.getCommand(COMMAND)).thenReturn(command);
-        when(command.invoke(catalogInfo,id)).thenReturn(new Object());
+        when(catalogManager.getCommand(catalogInfo,CatalogResultType.SINGLE)).thenReturn(command);
+        when(command.invokeSingle(catalogInfo,id)).thenReturn(new Object());
 
         ResponseData<Object> result = catalogService.getCatalogElementById(request);
 
@@ -140,9 +146,11 @@ public class CatalogServiceTest {
                     .pathParams(params)
                     .build();
 
+            catalogInfo.setType(CatalogResultType.SINGLE.name().toLowerCase());
+
             when(catalogProperties.getCatalog(CATALOG_VALUE)).thenReturn(catalogInfo);
-            when(catalogManager.getCommand(COMMAND)).thenReturn(command);
-            when(command.invoke(catalogInfo,id)).thenThrow(new EmptyResultDataAccessException("zero",1));
+            when(catalogManager.getCommand(catalogInfo,CatalogResultType.SINGLE)).thenReturn(command);
+            when(command.invokeSingle(catalogInfo,id)).thenThrow(new EmptyResultDataAccessException("zero",1));
 
             catalogService.getCatalogElementById(request);
             fail("Should not pass");
@@ -166,9 +174,11 @@ public class CatalogServiceTest {
                     .pathParams(params)
                     .build();
 
+            catalogInfo.setType(CatalogResultType.SINGLE.name().toLowerCase());
+
             when(catalogProperties.getCatalog(CATALOG_VALUE)).thenReturn(catalogInfo);
-            when(catalogManager.getCommand(COMMAND)).thenReturn(command);
-            when(command.invoke(catalogInfo,id)).thenThrow(new InvalidDataAccessResourceUsageException("invalid sql"));
+            when(catalogManager.getCommand(catalogInfo,CatalogResultType.SINGLE)).thenReturn(command);
+            when(command.invokeSingle(catalogInfo,id)).thenThrow(new InvalidDataAccessResourceUsageException("invalid sql"));
 
             catalogService.getCatalogElementById(request);
             fail("Should not pass");

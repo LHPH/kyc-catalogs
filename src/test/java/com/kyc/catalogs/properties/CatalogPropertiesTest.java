@@ -24,7 +24,7 @@ public class CatalogPropertiesTest {
     public void getCatalog_selectElement_returnElement(){
 
         CatalogInfo result = catalogProperties.getCatalog("kyc-test");
-        Assert.assertEquals("SQL_TEST",result.getSqlQuery());
+        Assert.assertEquals("SQL_TEST",result.getSqlQueries().getAllQuery());
         Assert.assertEquals("COMMAND_TEST",result.getCommand());
     }
 
@@ -33,7 +33,7 @@ public class CatalogPropertiesTest {
 
         CatalogInfo result = catalogProperties.getCatalog("kyc-test-1");
         Assert.assertNotNull(result);
-        Assert.assertNull(result.getSqlQuery());
+        Assert.assertNull(result.getSqlQueries());
     }
 
 }

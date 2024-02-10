@@ -1,13 +1,22 @@
 package com.kyc.catalogs.command;
 
 import com.kyc.catalogs.model.properties.CatalogInfo;
+import com.kyc.core.model.web.RequestData;
 
 import java.util.List;
+import java.util.Map;
 
 public interface CatalogCommand<T> {
 
-    List<T> invoke(CatalogInfo catalogInfo);
+    default List<T> invokeList(CatalogInfo catalogInfo){
+        throw new UnsupportedOperationException("Not Implemented");
+    }
 
-    T  invoke(CatalogInfo catalogInfo, Object id);
+    default List<T> invokeList(CatalogInfo catalogInfo, Map<String,String> filter){
+        throw new UnsupportedOperationException("Not Implemented");
+    }
 
+    default T  invokeSingle(CatalogInfo catalogInfo, Object element){
+        throw new UnsupportedOperationException("Not Implemented");
+    }
 }

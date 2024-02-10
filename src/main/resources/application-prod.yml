@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: ${kyc.config.database.url}
-    username: ${kyc.config.database.username}
-    password: ${kyc.config.database.pass}
+    url: ${kyc.config.database.postgresql.url}
+    username: ${kyc.config.database.postgresql.username}
+    password: ${kyc.config.database.postgresql.secret}
     hikari:
       maximum-pool-size: 10
   jpa:
@@ -15,6 +15,21 @@ spring:
 kyc-config:
   cron:
     clean-cache: ${kyc.config.cache.catalogs.cron}
+  services:
+    soap:
+      postal-codes:
+        url: http://localhost:9007/kyc/soap/KYCPostalCode
+        trace: false
+
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 30
+    preferIpAddress: true
+  client:
+    enabled: false
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://${kyc.config.hostname}:9100/eureka
 
 logging:
   file:
@@ -34,7 +49,7 @@ logging:
 
 server:
   ssl:
-    enabled: true
+    enabled: false
     key-store-type: PKCS12
     key-store: /opt/kyc/kyc-config-files/keystore.p12
     key-store-password: test

@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 
 import static com.kyc.catalogs.constants.AppConstants.MESSAGE_003;
 
@@ -17,7 +18,13 @@ public class InvalidCatalogCommand implements CatalogCommand<Object>{
     @Autowired
     private KycMessages kycMessages;
 
-    public List<Object> invoke(CatalogInfo catalogInfo){
+    @Override
+    public List<Object> invokeList(CatalogInfo catalogInfo) {
+        return invokeList(catalogInfo,null);
+    }
+
+    @Override
+    public List<Object> invokeList(CatalogInfo catalogInfo, Map<String,String> filter){
         throw KycRestException.builderRestException()
                 .outputData("Not Implemented")
                 .errorData(kycMessages.getMessage(MESSAGE_003))
@@ -25,7 +32,8 @@ public class InvalidCatalogCommand implements CatalogCommand<Object>{
                 .build();
     }
 
-    public Object  invoke(CatalogInfo catalogInfo, Object id){
+    @Override
+    public Object  invokeSingle(CatalogInfo catalogInfo, Object id){
         throw KycRestException.builderRestException()
                 .outputData("Not Implemented")
                 .errorData(kycMessages.getMessage(MESSAGE_003))

@@ -1,6 +1,7 @@
 package com.kyc.catalogs.command;
 
 import com.kyc.catalogs.model.properties.CatalogInfo;
+import com.kyc.catalogs.model.properties.SqlQueriesInfo;
 import com.kyc.catalogs.repository.SimpleSqlRepository;
 import org.junit.Assert;
 import org.junit.Before;
@@ -33,8 +34,9 @@ public class SqlQueryCatalogCommandTest {
     public void setUp(){
 
         catalogInfo = new CatalogInfo();
-        catalogInfo.setSqlQuery("QUERY");
-        catalogInfo.setSqlQueryId("QUERY_ID");
+        catalogInfo.setSqlQueries(new SqlQueriesInfo());
+        catalogInfo.getSqlQueries().setAllQuery("QUERY");
+        catalogInfo.getSqlQueries().setSingleQuery("QUERY_ID");
     }
 
     @Test
@@ -45,9 +47,9 @@ public class SqlQueryCatalogCommandTest {
         map.put("id","1");
         records.add(map);
 
-        when(repository.getCatalog(catalogInfo.getSqlQuery())).thenReturn(records);
+        when(repository.getCatalog(catalogInfo.getSqlQueries().getAllQuery())).thenReturn(records);
 
-        List<LinkedHashMap<String,Object>> result = command.invoke(catalogInfo);
+        List<LinkedHashMap<String,Object>> result = command.invokeList(catalogInfo);
         Assert.assertFalse(result.isEmpty());
         Assert.assertEquals(map.get("id"),result.get(0).get("id"));
     }
@@ -57,9 +59,9 @@ public class SqlQueryCatalogCommandTest {
 
         List<Map<String,Object>> records = new ArrayList<>();
 
-        when(repository.getCatalog(catalogInfo.getSqlQuery())).thenReturn(records);
+        when(repository.getCatalog(catalogInfo.getSqlQueries().getAllQuery())).thenReturn(records);
 
-        List<LinkedHashMap<String,Object>> result = command.invoke(catalogInfo);
+        List<LinkedHashMap<String,Object>> result = command.invokeList(catalogInfo);
         Assert.assertTrue(result.isEmpty());
     }
 
@@ -69,9 +71,9 @@ public class SqlQueryCatalogCommandTest {
         Map<String,Object> map = new HashMap<>();
         map.put("id","1");
 
-        when(repository.getCatalogById(catalogInfo.getSqlQueryId(),"1")).thenReturn(map);
+        when(repository.getCatalogById(catalogInfo.getSqlQueries().getSingleQuery(),"1")).thenReturn(map);
 
-        LinkedHashMap<String,Object> result = command.invoke(catalogInfo,"1");
+        LinkedHashMap<String,Object> result = command.invokeSingle(catalogInfo,"1");
         Assert.assertEquals(map.get("id"),result.get("id"));
     }
 

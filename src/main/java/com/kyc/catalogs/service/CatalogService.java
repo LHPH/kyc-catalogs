@@ -2,6 +2,7 @@ package com.kyc.catalogs.service;
 
 import com.kyc.catalogs.command.CatalogCommand;
 import com.kyc.catalogs.config.CatalogManager;
+import com.kyc.catalogs.enums.CatalogResultType;
 import com.kyc.catalogs.model.properties.CatalogInfo;
 import com.kyc.catalogs.properties.CatalogProperties;
 import com.kyc.core.exception.KycRestException;
@@ -20,6 +21,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.ws.soap.client.SoapFaultClientException;
 
 import java.util.List;
@@ -45,16 +47,24 @@ public class CatalogService {
     @Autowired
     private KycMessages kycMessages;
 
-    @Cacheable(value = "ALL_CATALOG",key = "#req.getPathParams().get('catalog')")
+    @Cacheable(value = "ALL_CATALOG",key = "#req.getPathParams().get('catalog')",condition = "#req.getQueryParams().isEmpty()")
     public ResponseData<List<Object>> getCatalog(RequestData<Void> req){
 
         Map<String,Object> map = req.getPathParams();
+        Map<String, String> params = req.getQueryParams();
         String catalog = map.get(PATH_PARAM_CATALOG).toString();
 
         CatalogInfo catalogInfo = catalogProperties.getCatalog(catalog);
         LOGGER.info("Consultando catalogo {}",catalog);
-        CatalogCommand<Object> command = catalogManager.getCommand(catalogInfo.getCommand());
-        List<Object> result = command.invoke(catalogInfo);
+        CatalogCommand<Object> command = catalogManager.getCommand(catalogInfo,CatalogResultType.LIST);
+
+        List<Object> result;
+        if(CollectionUtils.isEmpty(params)){
+            result = command.invokeList(catalogInfo);
+        }
+        else{
+            result = command.invokeList(catalogInfo,params);
+        }
         return ResponseData.of(result);
     }
 
@@ -76,8 +86,8 @@ public class CatalogService {
 
            LOGGER.info("Consultando catalogo {} con criteria {}",catalog,criteria);
            CatalogInfo catalogInfo = catalogProperties.getCatalog(catalog);
-           CatalogCommand<Object> command = catalogManager.getCommand(catalogInfo.getCommand());
-           Object result = command.invoke(catalogInfo,idRow);
+           CatalogCommand<Object> command = catalogManager.getCommand(catalogInfo, CatalogResultType.SINGLE);
+           Object result = command.invokeSingle(catalogInfo,idRow);
            return ResponseData.of(result);
        }
        catch(EmptyResultDataAccessException empEx){
@@ -86,9 +96,10 @@ public class CatalogService {
        }
        catch(KycSoapException soapEx){
 
-           if(soapEx.getException() instanceof SoapFaultClientException){
+           if(soapEx.getErrorData()!=null){
 
-               throw sendError(MESSAGE_002,HttpStatus.UNPROCESSABLE_ENTITY,soapEx,req);
+               MessageData messageData = soapEx.getErrorData();
+               throw sendError(messageData,HttpStatus.UNPROCESSABLE_ENTITY,soapEx,req);
            }
            throw sendError(MESSAGE_001,HttpStatus.SERVICE_UNAVAILABLE,soapEx,req);
        }
@@ -101,7 +112,7 @@ public class CatalogService {
     public ResponseData<List<String>> getListCatalogs(){
 
         List<String> result = catalogProperties.getCatalogs()
-                .stream().map(e -> e.getId())
+                .stream().map(CatalogInfo::getId)
                 .collect(Collectors.toList());
 
         return ResponseData.of(result);
@@ -117,8 +128,13 @@ public class CatalogService {
     private KycRestException sendError(String code, HttpStatus httpStatus, Exception ex, RequestData<Void> req){
 
         MessageData message = kycMessages.getMessage(code);
+        return sendError(message,httpStatus,ex,req);
+    }
+
+    private KycRestException sendError(MessageData messageData, HttpStatus httpStatus, Exception ex, RequestData<Void> req){
+
         return KycRestException.builderRestException()
-                .errorData(message)
+                .errorData(messageData)
                 .exception(ex)
                 .inputData(req)
                 .status(httpStatus)

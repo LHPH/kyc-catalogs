@@ -2,6 +2,7 @@ package com.kyc.catalogs.command;
 
 import com.kyc.catalogs.model.properties.CatalogInfo;
 import com.kyc.catalogs.repository.SimpleSqlRepository;
+import com.kyc.core.model.web.RequestData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +22,10 @@ public class SqlQueryCatalogCommand implements CatalogCommand<LinkedHashMap<Stri
     private SimpleSqlRepository repository;
 
     @Override
-    public List<LinkedHashMap<String,Object>> invoke(CatalogInfo catalogInfo) {
+    public List<LinkedHashMap<String,Object>> invokeList(CatalogInfo catalogInfo) {
 
         LOGGER.info("Query in Database");
-        List<Map<String,Object>> map = repository.getCatalog(catalogInfo.getSqlQuery());
+        List<Map<String,Object>> map = repository.getCatalog(catalogInfo.getSqlQueries().getAllQuery());
 
         List<LinkedHashMap<String,Object>> listRecords = new ArrayList<>();
         map.forEach(row -> listRecords.add(new LinkedHashMap<>(row)));
@@ -32,10 +33,10 @@ public class SqlQueryCatalogCommand implements CatalogCommand<LinkedHashMap<Stri
     }
 
     @Override
-    public LinkedHashMap<String, Object> invoke(CatalogInfo catalogInfo, Object id) {
+    public LinkedHashMap<String, Object> invokeSingle(CatalogInfo catalogInfo, Object id) {
 
         LOGGER.info("Query in Database");
-        Map<String, Object> row = repository.getCatalogById(catalogInfo.getSqlQueryId(),id);
+        Map<String, Object> row = repository.getCatalogById(catalogInfo.getSqlQueries().getSingleQuery(),id);
         return new LinkedHashMap<>(row);
     }
 }

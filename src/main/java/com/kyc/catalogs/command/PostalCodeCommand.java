@@ -21,26 +21,13 @@ import static com.kyc.catalogs.constants.AppConstants.MESSAGE_003;
 public class PostalCodeCommand implements CatalogCommand<PostalCodeData>{
 
     @Autowired
-    private KycMessages kycMessages;
-
-    @Autowired
     private SoapClient<GetPostalCodeRequest, GetPostalCodeResponse> soapClient;
 
     @Autowired
     private PostalCodeConverter converter;
 
     @Override
-    public List<PostalCodeData> invoke(CatalogInfo catalogInfo) {
-
-        throw KycRestException.builderRestException()
-                .outputData("Not Implemented")
-                .errorData(kycMessages.getMessage(MESSAGE_003))
-                .status(HttpStatus.NOT_IMPLEMENTED)
-                .build();
-    }
-
-    @Override
-    public PostalCodeData invoke(CatalogInfo catalogInfo, Object id) {
+    public PostalCodeData invokeSingle(CatalogInfo catalogInfo, Object id) {
 
 
         GetPostalCodeRequest request = new GetPostalCodeRequest();

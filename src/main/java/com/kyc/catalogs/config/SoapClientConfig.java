@@ -2,8 +2,10 @@ package com.kyc.catalogs.config;
 
 import com.kyc.catalogs.ws.postalcodes.types.GetPostalCodeRequest;
 import com.kyc.catalogs.ws.postalcodes.types.GetPostalCodeResponse;
+import com.kyc.core.soap.MessageDataSoapFaultResolver;
 import com.kyc.core.soap.SoapClient;
 import com.kyc.core.soap.interceptors.SoapMessageInterceptor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.webservices.client.WebServiceTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +18,11 @@ import java.util.List;
 @Configuration
 public class SoapClientConfig {
 
-    private String postalCodeUrl = "http://localhost:9007/kyc/soap/PostalCodes";
+    @Value("${kyc-config.services.soap.postal-codes.url}")
+    private String postalCodeUrl;
+
+    @Value("${kyc-config.services.soap.postal-codes.trace}")
+    private Boolean traceSoap;
 
     @Bean
     public Jaxb2Marshaller marshaller(){
@@ -36,7 +42,8 @@ public class SoapClientConfig {
         WebServiceTemplate template = builder
                 .setMarshaller(marshaller())
                 .setUnmarshaller(marshaller())
-                .interceptors(new SoapMessageInterceptor(true))
+                .interceptors(new SoapMessageInterceptor(traceSoap))
+                .setFaultMessageResolver(new MessageDataSoapFaultResolver())
                 .build();
 
         return new SoapClient<>(postalCodeUrl,template);

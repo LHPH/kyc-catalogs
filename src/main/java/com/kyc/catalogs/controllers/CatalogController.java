@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collections;
@@ -33,10 +34,12 @@ public class CatalogController {
 	private CatalogDelegate delegate;
 	
 	@GetMapping(value=ENDPOINT_CATALOG)
-	public ResponseEntity<ResponseData<List<Object>>> getCatalog(@PathVariable("catalog") String catalog){
+	public ResponseEntity<ResponseData<List<Object>>> getCatalog(@PathVariable("catalog") String catalog,
+																 @RequestParam Map<String,String> params){
 
 		RequestData<Void> req = RequestData.<Void>builder()
 				.pathParams(Collections.singletonMap(PATH_PARAM_CATALOG,catalog))
+				.queryParams(params)
 				.build();
 
 		return getDelegate().getCatalog(req);
