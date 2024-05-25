@@ -28,6 +28,7 @@ eureka:
     leaseRenewalIntervalInSeconds: 30
     preferIpAddress: true
   client:
+    enabled: true
     fetchRegistry: true
     serviceUrl:
       defaultZone: http://${kyc.config.hostname}:9100/eureka
