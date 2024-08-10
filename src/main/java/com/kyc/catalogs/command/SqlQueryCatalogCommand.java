@@ -2,7 +2,6 @@ package com.kyc.catalogs.command;
 
 import com.kyc.catalogs.model.properties.CatalogInfo;
 import com.kyc.catalogs.repository.SimpleSqlRepository;
-import com.kyc.core.model.web.RequestData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

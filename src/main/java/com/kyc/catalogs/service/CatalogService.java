@@ -22,7 +22,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
-import org.springframework.ws.soap.client.SoapFaultClientException;
 
 import java.util.List;
 import java.util.Map;

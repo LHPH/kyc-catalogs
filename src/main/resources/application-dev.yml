@@ -5,12 +5,6 @@ spring:
     password: kyc_pass
     hikari:
       maximum-pool-size: 1
-  jpa:
-    properties:
-      hibernate:
-        temp:
-          use_jdbc_metadata_defaults: false
-    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
 
 kyc-config:
   cron:
@@ -25,7 +19,7 @@ eureka:
   instance:
     preferIpAddress: true
   client:
-    enabled: false
+    enabled: true
     fetchRegistry: true
     serviceUrl:
       defaultZone: http://localhost:9100/eureka
@@ -39,15 +33,3 @@ logging:
     org.hibernate.SQL: DEBUG
     org.hibernate.type.descriptor.sql: TRACE
     org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping: TRACE
-
-server:
-  ssl:
-    enabled: false
-    #client-auth: need
-    key-store-type: PKCS12
-    key-store: /home/kyc/kyc-config-files/keystore.p12
-    key-store-password: test
-    key-alias: backbone-key
-    #trust-store-type: PKCS12
-    #trust-store: /home/kyc/kyc-config-files/keystore.p12
-    #trust-store-password: test
