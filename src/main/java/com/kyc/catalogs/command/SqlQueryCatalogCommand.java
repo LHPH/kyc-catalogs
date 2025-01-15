@@ -38,4 +38,9 @@ public class SqlQueryCatalogCommand implements CatalogCommand<LinkedHashMap<Stri
         Map<String, Object> row = repository.getCatalogById(catalogInfo.getSqlQueries().getSingleQuery(),id);
         return new LinkedHashMap<>(row);
     }
+
+    @Override
+    public List<LinkedHashMap<String, Object>> invokeList(CatalogInfo catalogInfo, Map<String, String> filter) {
+        return invokeList(catalogInfo);//No filter
+    }
 }
