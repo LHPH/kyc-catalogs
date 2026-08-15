@@ -3,16 +3,14 @@ package com.kyc.catalogs.controllers;
 import com.kyc.catalogs.controllers.delegate.CatalogDelegate;
 import com.kyc.core.model.web.RequestData;
 import com.kyc.core.model.web.ResponseData;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
+import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
@@ -30,7 +28,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class)
+
 @AutoConfigureMockMvc(addFilters = false)
 @WebMvcTest(controllers = CatalogController.class)
 @ActiveProfiles("test")
@@ -39,13 +37,13 @@ public class CatalogControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
+    @MockitoBean
     private CatalogDelegate delegate;
 
     private List<LinkedHashMap<String,Object>> list;
     private LinkedHashMap<String,Object> element;
 
-    @Before
+    @BeforeEach
     public void setUp(){
 
         list = new ArrayList<>();

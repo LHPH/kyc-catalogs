@@ -3,13 +3,12 @@ package com.kyc.catalogs.command;
 import com.kyc.catalogs.model.properties.CatalogInfo;
 import com.kyc.catalogs.model.properties.SqlQueriesInfo;
 import com.kyc.catalogs.repository.SimpleSqlRepository;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,9 +16,12 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class SqlQueryCatalogCommandTest {
 
     @Mock
@@ -30,7 +32,7 @@ public class SqlQueryCatalogCommandTest {
 
     private CatalogInfo catalogInfo;
 
-    @Before
+    @BeforeEach
     public void setUp(){
 
         catalogInfo = new CatalogInfo();
@@ -50,8 +52,8 @@ public class SqlQueryCatalogCommandTest {
         when(repository.getCatalog(catalogInfo.getSqlQueries().getAllQuery())).thenReturn(records);
 
         List<LinkedHashMap<String,Object>> result = command.invokeList(catalogInfo);
-        Assert.assertFalse(result.isEmpty());
-        Assert.assertEquals(map.get("id"),result.get(0).get("id"));
+        assertFalse(result.isEmpty());
+        assertEquals(map.get("id"),result.get(0).get("id"));
     }
 
     @Test
@@ -62,7 +64,7 @@ public class SqlQueryCatalogCommandTest {
         when(repository.getCatalog(catalogInfo.getSqlQueries().getAllQuery())).thenReturn(records);
 
         List<LinkedHashMap<String,Object>> result = command.invokeList(catalogInfo);
-        Assert.assertTrue(result.isEmpty());
+        assertTrue(result.isEmpty());
     }
 
     @Test
@@ -74,7 +76,7 @@ public class SqlQueryCatalogCommandTest {
         when(repository.getCatalogById(catalogInfo.getSqlQueries().getSingleQuery(),"1")).thenReturn(map);
 
         LinkedHashMap<String,Object> result = command.invokeSingle(catalogInfo,"1");
-        Assert.assertEquals(map.get("id"),result.get("id"));
+        assertEquals(map.get("id"),result.get("id"));
     }
 
 }

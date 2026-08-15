@@ -9,13 +9,12 @@ import com.kyc.core.exception.KycRestException;
 import com.kyc.core.model.web.RequestData;
 import com.kyc.core.model.web.ResponseData;
 import com.kyc.core.properties.KycMessages;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.dao.InvalidDataAccessResourceUsageException;
 import org.springframework.http.HttpStatus;
@@ -28,10 +27,12 @@ import java.util.Map;
 
 import static com.kyc.catalogs.constants.AppConstants.PATH_PARAM_CATALOG;
 import static com.kyc.catalogs.constants.AppConstants.PATH_PARAM_CRITERIA;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class CatalogServiceTest {
 
     @Mock
@@ -56,7 +57,7 @@ public class CatalogServiceTest {
     private static final String CATALOG_CRITERIA_VALUE ="1";
     private static final String COMMAND = "command";
 
-    @Before
+    @BeforeEach
     public void setUp(){
 
         Map<String,Object> params = new HashMap<>();
@@ -79,9 +80,9 @@ public class CatalogServiceTest {
 
         ResponseData<List<Object>> result = catalogService.getCatalog(request);
 
-        Assert.assertNotNull(result);
-        Assert.assertNotNull(result.getData());
-        Assert.assertEquals(HttpStatus.OK,result.getHttpStatus());
+        assertNotNull(result);
+        assertNotNull(result.getData());
+        assertEquals(HttpStatus.OK,result.getHttpStatus());
     }
 
     @Test
@@ -103,9 +104,9 @@ public class CatalogServiceTest {
 
         ResponseData<Object> result = catalogService.getCatalogElementById(request);
 
-        Assert.assertNotNull(result);
-        Assert.assertNotNull(result.getData());
-        Assert.assertEquals(HttpStatus.OK,result.getHttpStatus());
+        assertNotNull(result);
+        assertNotNull(result.getData());
+        assertEquals(HttpStatus.OK,result.getHttpStatus());
 
     }
 
@@ -128,9 +129,9 @@ public class CatalogServiceTest {
 
         ResponseData<Object> result = catalogService.getCatalogElementById(request);
 
-        Assert.assertNotNull(result);
-        Assert.assertNotNull(result.getData());
-        Assert.assertEquals(HttpStatus.OK,result.getHttpStatus());
+        assertNotNull(result);
+        assertNotNull(result.getData());
+        assertEquals(HttpStatus.OK,result.getHttpStatus());
     }
 
     @Test
@@ -157,7 +158,7 @@ public class CatalogServiceTest {
         }
         catch(KycRestException ex){
 
-            Assert.assertEquals(HttpStatus.UNPROCESSABLE_ENTITY,ex.getStatus());
+            assertEquals(HttpStatus.UNPROCESSABLE_ENTITY,ex.getStatus());
         }
     }
 
@@ -185,7 +186,7 @@ public class CatalogServiceTest {
         }
         catch(KycRestException ex){
 
-            Assert.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,ex.getStatus());
+            assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,ex.getStatus());
         }
 
     }
@@ -194,7 +195,7 @@ public class CatalogServiceTest {
     public void cleanCatalogCache_cleaningCache_returnSuccess(){
 
         ResponseData<Boolean> result = catalogService.cleanCatalogCache();
-        Assert.assertNotNull(result);
+        assertNotNull(result);
     }
 
     @Test
@@ -205,8 +206,8 @@ public class CatalogServiceTest {
 
         when(catalogProperties.getCatalogs()).thenReturn(Collections.singletonList(catalogInfo));
         ResponseData<List<String>> result = catalogService.getListCatalogs();
-        Assert.assertNotNull(result);
-        Assert.assertEquals(catalogInfo.getId(),result.getData().get(0));
+        assertNotNull(result);
+        assertEquals(catalogInfo.getId(),result.getData().get(0));
     }
 
 }

@@ -3,19 +3,19 @@ package com.kyc.catalogs.controllers.delegate;
 import com.kyc.catalogs.service.CatalogService;
 import com.kyc.core.model.web.RequestData;
 import com.kyc.core.model.web.ResponseData;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class CatalogControllerDelegateTest {
 
     @Mock
@@ -29,7 +29,7 @@ public class CatalogControllerDelegateTest {
 
     private RequestData requestData;
 
-    @Before
+    @BeforeEach
     public void setUp(){
 
         requestData = RequestData.builder().build();
